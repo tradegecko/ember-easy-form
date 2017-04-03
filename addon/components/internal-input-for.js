@@ -66,7 +66,7 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
   dependentValidationKeyCanTrigger: false,
   tagName: 'div',
   classNames: ['string'],
-  classNameBindings: ['wrapperConfig.inputClass', 'propertyName'],
+  classNameBindings: ['wrapperConfig.inputClass']
   didInsertElement: function() {
     var labelComponent, inputComponent;
 
@@ -113,5 +113,5 @@ FormInputComponent.reopenClass({
   positionalParams: ['propertyName'],
 });
 
-export var knownProperties = ['propertyName', 'label', 'hint'];
+export var knownProperties = ['propertyName', 'label', 'hint', 'classNames', 'class', 'tagName'];
 export default FormInputComponent;
