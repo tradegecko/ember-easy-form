@@ -2,7 +2,6 @@ import Ember from 'ember';
 import config from 'ember-easy-form/config';
 
 export default Ember.Mixin.create({
-  classNameBindings: ['property'],
 
   wrapper: Ember.computed(function() {
     var wrapperView = this.nearestWithProperty('wrapper');
