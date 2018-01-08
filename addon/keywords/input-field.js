@@ -47,7 +47,7 @@ export default {
     hash.type = state.type;
     hash.property = state.property;
     if (!hash.name) {
-      hash.name = state.property;
+      hash.name = state.property.replace('model.', '');;
     }
     hash.isInput = true;
     env.hooks.component(morph, env, scope, state.componentName, params, hash, { default: template, inverse }, visitor);
