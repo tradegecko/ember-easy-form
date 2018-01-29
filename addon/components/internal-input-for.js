@@ -113,5 +113,5 @@ FormInputComponent.reopenClass({
   positionalParams: ['propertyName'],
 });
 
-export var knownProperties = ['propertyName', 'label', 'hint', 'classNames', 'class', 'tagName', 'id'];
+export var knownProperties = ['propertyName', 'label', 'hint', 'classNames', 'class', 'tagName', 'id', 'elementId'];
 export default FormInputComponent;
