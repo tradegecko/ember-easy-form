@@ -8,8 +8,12 @@ const PropertyNameNotDefinedMessage = 'Please, define the property name. ' +
 var FormInputComponent = Ember.Component.extend(WrapperMixin, {
   layoutName: Ember.computed.oneWay('wrapperConfig.inputTemplate'),
 
-  model: Ember.computed(function() {
-    var component = this.nearestWithProperty('model');
+  nearestParentWithModel: Ember.computed(function() {
+    return this.nearestWithProperty('model');
+  }),
+
+  model: Ember.computed('nearestParentWithModel.model', function() {
+    var component = this.get('nearestParentWithModel');
     return Ember.get(component, 'model');
   }),
 
