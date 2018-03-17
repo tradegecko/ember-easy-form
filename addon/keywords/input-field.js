@@ -53,6 +53,7 @@ export default {
     hash.inputType = splitName[splitName.length - 1];
     hash.isInput = true;
     env.hooks.component(morph, env, scope, state.componentName, params, hash, { default: template, inverse }, visitor);
+    env.view.didInsertElement();
   },
 
   rerender(...args) {
