@@ -46,7 +46,11 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
   init: function() {
     this._super(...arguments);
     var property = this.get('propertyName');
+    this.setupDisabledProperties(property);
+    this.setupErrorProperties(property);
+  },
 
+  setupErrorProperties(property) {
     this.classNameBindings.push('showError:' + this.get('wrapperConfig.fieldErrorClass'));
     Ember.defineProperty(this, 'showError', Ember.computed('canShowValidationError', 'formForModel.errors.' + property + '.[]', function() {
       var errors = this.get('formForModel.errors.' + property);
@@ -54,6 +58,13 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
       return !!(canShowValidationError && errors && errors[0]);
     }));
   },
+
+  setupDisabledProperties(property) {
+    Ember.defineProperty(this, 'disabled', Ember.computed(`formView.disabledStateHash.${property}`, function() {
+      return this.get(`formView.disabledStateHash.${property}`);
+    }));
+  },
+
   setupValidationDependencies: Ember.on('init', function() {
     this._keysForValidationDependencies = Ember.A();
     var keys = this.get('formForModel._dependentValidationKeys'), key;
