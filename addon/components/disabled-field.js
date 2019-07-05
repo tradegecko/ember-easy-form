@@ -5,18 +5,24 @@ var DisabledField = Ember.Component.extend(WrapperMixin, {
   tagName: '',
   layoutName: Ember.computed.oneWay('wrapperConfig.disabledTemplate'),
 
-  formForComponent: Ember.computed(function() {
-    return this.nearestWithProperty('model').get('nearestParentWithModel');
+  parentWithDisabledState: Ember.computed(function() {
+    let formForComponent = this.nearestWithProperty('model').get('nearestParentWithModel');
+    let formView = this.get('formView') || this.get('parentView.formView');
+    return ('disabledStateHash' in formView) ? formView : formForComponent;
   }),
 
   init: function() {
     this._super(...arguments);
     var propertyName = this.get('propertyName') || this.get('property');
-    var formForComponent = this.get('formView') || this.get('parentView.formView');
-    Ember.defineProperty(this, 'disabledText', Ember.computed(`${formForComponent}.disabledStateHash.${propertyName}`, function() {
-      if (!formForComponent) { return };
-      return formForComponent.get(`disabledStateHash.${propertyName}`);
-    }));
+    var parentWithDisabledState = this.get('parentWithDisabledState');
+    Ember.defineProperty(
+      this,
+      'disabledText',
+      Ember.computed(`parentWithDisabledState.disabledStateHash.${propertyName}`, function() {
+        if (!parentWithDisabledState) { return };
+        return Ember.get(parentWithDisabledState, `disabledStateHash.${propertyName}`);
+      })
+    );
   },
 });
 

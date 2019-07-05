@@ -12,6 +12,10 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
     return this.nearestWithProperty('model');
   }),
 
+  nearestParentWithDisabledHash: Ember.computed(function() {
+    return this.nearestWithProperty('disabledStateHash');
+  }),
+
   model: Ember.computed('nearestParentWithModel.model', function() {
     var component = this.get('nearestParentWithModel');
     return Ember.get(component, 'model');
@@ -60,8 +64,9 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
   },
 
   setupDisabledProperties(property) {
-    Ember.defineProperty(this, 'disabled', Ember.computed(`formView.disabledStateHash.${property}`, function() {
-      return this.get(`formView.disabledStateHash.${property}`);
+    this.set('disabled', true);
+    Ember.defineProperty(this, 'disabled', Ember.computed(`nearestParentWithDisabledHash.disabledStateHash.${property}`, function() {
+      return this.get(`nearestParentWithDisabledHash.disabledStateHash.${property}`);
     }));
   },
 
@@ -128,5 +133,5 @@ FormInputComponent.reopenClass({
   positionalParams: ['propertyName'],
 });
 
-export var knownProperties = ['propertyName', 'label', 'wrapper', 'hint', 'classNames', 'class', 'tagName', 'id', 'elementId'];
+export var knownProperties = ['propertyName', 'label', 'wrapper', 'hint', 'classNames', 'class', 'tagName', 'id', 'elementId', 'disabledStateHash'];
 export default FormInputComponent;
