@@ -53,6 +53,13 @@ var FormInputComponent = Ember.Component.extend(WrapperMixin, {
       var canShowValidationError = this.get('canShowValidationError');
       return !!(canShowValidationError && errors && errors[0]);
     }));
+
+    this.classNameBindings.push('showWarning:' + this.get('wrapperConfig.fieldWarningClass'));
+    Ember.defineProperty(this, 'showWarning', Ember.computed('canShowValidationWarning', 'formForModel.warnings.' + property + '.[]', function() {
+      var warnings = this.get('formForModel.warnings.' + property);
+      var canShowValidationWarning = this.get('canShowValidationWarning');
+      return !!(canShowValidationWarning && warnings && warnings[0]);
+    }));
   },
   setupValidationDependencies: Ember.on('init', function() {
     this._keysForValidationDependencies = Ember.A();

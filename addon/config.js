@@ -4,13 +4,16 @@ export default {
   _wrappers: {
     'default': {
       formClass: '',
+      fieldWarningClass: 'fieldWithWarnings',
       fieldErrorClass: 'fieldWithErrors',
       inputClass: 'input',
+      warningClass: 'warning',
       errorClass: 'error',
       hintClass: 'hint',
       labelClass: '',
       submitClass: '',
       inputTemplate: 'components/easy-form/input-for',
+      warningTemplate: 'components/easy-form/warning-field',
       errorTemplate: 'components/easy-form/error-field',
       labelTemplate: 'components/easy-form/label-field',
       hintTemplate: 'components/easy-form/hint-field',

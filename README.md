@@ -333,6 +333,7 @@ And then, you have to define the template used by this wrapper. In this example,
 <div class="{{unbound wrapperConfig.controlsWrapperClass}}">
   {{input-field property=propertyName inputOptions=inputOptions}}
   {{#if showError}}{{error-field property=propertyName}}{{/if}}
+  {{#if showWarning}}{{warning-field property=propertyName}}{{/if}}
   {{#if hintText}}{{hint-field property=propertyName text=hintText}}{{/if}}
 </div>
 ```
